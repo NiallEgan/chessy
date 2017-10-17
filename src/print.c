@@ -7,9 +7,12 @@
 #include "move.h"
 
 
-void print_from_to(Move move) {
-	if(!get_promotion(move)) printf("%s%s", sqs[get_from(move)], sqs[get_to(move)]);
-    else {
+char * long_algebraic(Move move) {
+	if(!get_promotion(move)) {
+        char *s = malloc(sizeof(char) * 5);
+        sprintf(s, "%s%s", sqs[get_from(move)], sqs[get_to(move)]);
+        return s;
+    } else {
         char promotion;
         switch(get_promotion(move)) {
             case KNIGHT:
@@ -28,7 +31,10 @@ void print_from_to(Move move) {
                 promotion = '?';
                 break;
         }
-        printf("%s%s%c", sqs[get_from(move)], sqs[get_to(move)], promotion);
+
+        char *s = malloc(sizeof(char) * 6);
+        sprintf(s, "%s%s%c", sqs[get_from(move)], sqs[get_to(move)], promotion);
+        return s;
     }
 }
 

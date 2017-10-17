@@ -8,27 +8,19 @@
 double pvs(Board b, int depth, double alpha, double beta, time_t start_time, int max_time);
 
 Move find_move(Board b, int max_time) {
-    printf("Finding move\n");
 	time_t start_time = time(NULL);
 	int depth = 0;
 	Move best_move = 0;
 
 	while(difftime(time(NULL), start_time) < max_time) {
 		double score = pvs(b, ++depth, -INF, INF, start_time, max_time);
-        printf("Searching at: %d\n", depth);
 
         if (difftime(time(NULL), start_time) < max_time) best_move = tt[zobrist_hash(b) % MAX_TABLE_SIZE]->best_move;
-
-        printf("Time diff: %f\n", difftime(time(NULL), start_time));
-
 	    if(fabs(score) >= CHECKMATE - 1000) {
-            printf("Time diff: %f\n", difftime(time(NULL), start_time));
-            printf("checkmate\n");
             return best_move;
         }
 	}
 
-    printf("Time diff: %f\n", difftime(time(NULL), start_time));
 	return best_move;
 }
 

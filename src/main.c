@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 #include "main.h"
 #include "search.h"
 #include "perft.h"
 
-#define MAX_MOVE_TIME 20
 #define COMPUTER_SIDE WHITE
 
 int* copy_ints(int* src, int len) {
@@ -14,16 +14,29 @@ int* copy_ints(int* src, int len) {
 }
 
 // atomove: takes a string and returns a move
-Move atomove(char const *squares, Board b) {
-    unsigned int from =  (unsigned) (squares[0] - 97)  + (squares[1] - 49) * 8;
-    unsigned int to = (unsigned) (squares[2] - 97) + (squares[3] - 49) * 8;
-    return make_move(from, to, b);
-}
 
 int main() {
-    init();
+    Board *bp = malloc(sizeof(Board *));
+
+    FILE *fp = fopen("out.txt", "w");
+    fprintf(fp, "out\n");
+    fclose(fp);
+
+    setbuf(stdout, NULL);
+    signal(SIGINT, SIG_IGN);
+
+    while (1) {
+        char command[50];
+        scanf("%s", command);
+        take_action(command, bp);
+
+    }
+
+    /*init();
 
     //run_all_tests();
+
+    setbuf(stdout, NULL);
 
     n_tt_total = n_tt_hits = n_pawn_total = n_pawn_hits = 0;
 
@@ -40,7 +53,7 @@ int main() {
     while(1) {
         print_board(b);
         Move move = find_move(b, MAX_MOVE_TIME);
-        print_from_to(move);;
+        long_algebraic(move);;
         take_move(move, b);
         print_board(b);
 
@@ -59,7 +72,7 @@ int main() {
 
     printf("TT hit rate: %f\n", (double) n_tt_hits / n_tt_total);
     printf("Total nodes searched (ish): %d\n", n_pawn_total);
-    printf("PT hit rate: %0.2f\n", (double) n_pawn_hits / n_pawn_total);
+    printf("PT hit rate: %0.2f\n", (double) n_pawn_hits / n_pawn_total);*/
 
     return 0;
 }

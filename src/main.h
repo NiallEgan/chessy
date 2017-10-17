@@ -8,6 +8,8 @@
 // Macros for a stack, where the pointer stack points to the next free element
 #define PUSH(stack, element) *(stack)++ = (element)
 #define POP(stack) *(--(stack) - 1)
+#define MAX_MOVE_TIME 10
+
 
 void end();
 void end_board(Board);
@@ -16,7 +18,7 @@ void init(void);
 char* move_to_short_algebraic(Move);
 void print_bb(Bitboard);
 void print_board(Board);
-void print_from_to(Move);
+char * long_algebraic(Move);
 
 
 int max_depth;
@@ -37,5 +39,7 @@ int n_pawn_hits;
 int n_pawn_total;
 int n_tt_hits;
 int n_tt_total;
+
+void take_action(const char*, Board *);
 
 #endif //CHESSY_MAIN_H

@@ -3,6 +3,7 @@
 
 #include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void add_piece(int sq, int side, Board b, int piece) {
     b->superbp[sq] = (unsigned int) piece;

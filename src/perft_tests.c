@@ -28,7 +28,7 @@ uint64_t perft(int depth, Board b, int side, int max_perft) {
             int x = 0;
             if(depth == max_perft || (x)) {
                 for (int j = depth; j < max_perft; j++) printf("     ");
-                print_from_to(moves[i]);
+                long_algebraic(moves[i]);
                 if (depth == 2) {
                 }
 
